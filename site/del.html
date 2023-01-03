@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>NES Game - Delete</title>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <h1>Remove NES Game</h1>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">View NES Games</a></li>
+            <li><a href="add.html">Add NES Game</a></li>
+            <li><a href="del.html">Remove NES Game</a></li>
+        </ul>
+    </nav>
+
+    <hr>
+
+    <label>Catalog ID</label><br>
+    <input id="id" type="text"><br>
+
+    <button onclick="del()">Validate</button><br>
+
+    <script>
+        function del() {
+            let id = document.getElementById("id").value;
+            console.log("id: " + id);
+            $.ajax({
+                url: 'http://localhost:9999/nesgame/NESGames/' + id,
+                type: 'DELETE',
+                success: function (result) {
+                    console.log("success");
+                    window.location.href = "index.html";
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

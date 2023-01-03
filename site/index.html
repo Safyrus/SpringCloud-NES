@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>NES Game</title>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <h1>NES Game Table</h1>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">View NES Games</a></li>
+            <li><a href="add.html">Add NES Game</a></li>
+            <li><a href="del.html">Remove NES Game</a></li>
+        </ul>
+    </nav>
+
+    <hr>
+
+    <div id="list">
+        <p>Waiting server response... (F5 to update)</p>
+    </div>
+
+    <script>
+        function getall() {
+            $.ajax({
+                url: 'http://localhost:9999/nesgame/NESGames',
+                type: 'GET',
+                success: function (result) {
+                    console.log("success");
+                    console.log(result);
+
+                    let str = "<table>\n<tr>\n<th>Name</th>\n<th>Catalog ID</th>\n</tr>\n";
+                    result.forEach(element => {
+                        str += "<tr>\n<td>" + element.name + "</td>\n<td>" + element.id + "</td>\n</tr>\n";
+                    });
+                    str += "</table>"
+
+                    document.getElementById("list").innerHTML = str;
+                }
+            });
+        }
+
+        getall()
+    </script>
+</body>
+
+</html>

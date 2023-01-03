@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>NES Game - Add</title>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <h1>Add NES Game</h1>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">View NES Games</a></li>
+            <li><a href="add.html">Add NES Game</a></li>
+            <li><a href="del.html">Remove NES Game</a></li>
+        </ul>
+    </nav>
+
+    <hr>
+
+    <label>Catalog ID</label><br>
+    <input id="id" type="text"><br>
+
+    <label>Name</label><br>
+    <input id="name" type="text"><br>
+
+    <button onclick="add()">Validate</button><br>
+
+    <script>
+        function add() {
+            let id = document.getElementById("id").value;
+            let name = document.getElementById("name").value;
+            let data = { "id": id, "name": name };
+            console.log("data:" + JSON.stringify(data));
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "http://localhost:9999/nesgame/NESGames", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onreadystatechange = function () {
+                if (xhr.status === 200) {
+                    console.log("success");
+                    window.location.href = "index.html";
+                }
+            };
+            xhr.send(JSON.stringify(data));
+        }
+    </script>
+</body>
+
+</html>
